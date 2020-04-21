@@ -14,6 +14,7 @@ from utilities.email_me import send_email
 from constant.crawler_contants import VERSION, VBPL_SITEMAP
 import time
 import re
+import os
 import shutil
 from tqdm import tqdm
 from datetime import datetime
@@ -107,7 +108,7 @@ def crawl(root_path, keep_record, check_duplicate,
             choosen_version = get_latest_version(root_path)
             if choosen_version is not None:
                 url_list = get_uncrawled_urls_compared_to_version(choosen_version)
-                if check_duplicate:
+                if check_duplicate and os.path.exists(choosen_version + "/vbpl_duplicate.txt"):
                     duplicate_list = load_record_to_list(choosen_version + "/vbpl_duplicate.txt")
                     url_list = [url for url in url_list if url not in duplicate_list]
             else:
@@ -118,7 +119,7 @@ def crawl(root_path, keep_record, check_duplicate,
             choosen_version = get_version_with_largest_crawled_document(root_path)
             if choosen_version is not None:
                 url_list = get_uncrawled_urls_compared_to_version(choosen_version)
-                if check_duplicate:
+                if check_duplicate and os.path.exists(choosen_version + "/vbpl_duplicate.txt"):
                     duplicate_list = load_record_to_list(choosen_version + "/vbpl_duplicate.txt")
                     url_list = [url for url in url_list if url not in duplicate_list]
             else:
@@ -139,7 +140,7 @@ def crawl(root_path, keep_record, check_duplicate,
         choosen_version = get_latest_version(root_path)
         if choosen_version is not None:
             url_list = get_uncrawled_urls_compared_to_version(choosen_version)
-            if check_duplicate:
+            if check_duplicate and os.path.exists(choosen_version + "/vbpl_duplicate.txt"):
                 duplicate_list = load_record_to_list(choosen_version + "/vbpl_duplicate.txt")
                 url_list = [url for url in url_list if url not in duplicate_list]
 
@@ -195,8 +196,9 @@ if __name__ == "__main__":
                                                check_duplicate=False,
                                                mode="auto")  # change to "manual" for manual
         print("\nĐang crawl sitemap và url...")
-        give_me_log(THUVIENPHAPLUAT_ROOTPATH+"crawl_thuvienphapluat.done.txt",
-                    (THUVIENPHAPLUAT_ROOTPATH+"urls/urls.lines", THUVIENPHAPLUAT_ROOTPATH+"transform",
+        give_me_log(THUVIENPHAPLUAT_ROOTPATH+FILE_VERSION+"/crawl_thuvienphapluat.done.txt",
+                    (THUVIENPHAPLUAT_ROOTPATH+FILE_VERSION+"/urls/urls.lines",
+                     THUVIENPHAPLUAT_ROOTPATH+FILE_VERSION+"/transform",
                      timer_extract_first, timer_crawl_first))
         LIST_OF_THUVIENPHAPLUAT__OFFICIAL_NUMBERS_PATH = get_latest_version(THUVIENPHAPLUAT_ROOTPATH) + "/official_numbers.txt"
         timer_extract_second = store_sitemaps_and_urls__vbpl(VBPL_ROOTPATH)
@@ -205,8 +207,9 @@ if __name__ == "__main__":
                                                 record_to_check_file=LIST_OF_THUVIENPHAPLUAT__OFFICIAL_NUMBERS_PATH,
                                                 check_duplicate=True,
                                                 mode="auto")  # change to "manual" for manual
-        give_me_log(VBPL_ROOTPATH+"crawl_vbpl.done.txt",
-                    (VBPL_ROOTPATH + "urls/urls.lines", VBPL_ROOTPATH + "transform",
+        give_me_log(VBPL_ROOTPATH+FILE_VERSION+"/crawl_vbpl.done.txt",
+                    (VBPL_ROOTPATH+FILE_VERSION+"/urls/urls.lines",
+                     VBPL_ROOTPATH+FILE_VERSION+"/transform",
                      timer_extract_second, timer_crawl_second))
         if is_sleppy_1 == 0 or is_sleppy_2 == 0:
             print("Đang ngủ...")

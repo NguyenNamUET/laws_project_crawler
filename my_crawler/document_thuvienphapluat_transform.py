@@ -4,13 +4,15 @@ from constant.crawler_contants import VERSION
 
 
 def get_document_content(soup):
-    if soup.find("div", attrs={"class": "TaiVanBan"}) is None \
-       and soup.find("a", attrs={"style": "color:blue", "class":"clsopentLogin"}) is None:
+    if soup.find("div", attrs={"class": "TaiVanBan"}) is None:
         #Loại trừ các văn bản không thể xem được
         content = soup.find("div", attrs={"class": "content1"})
-        for p_tag in content.find_all(True):
-            del p_tag["href"]
-        return str(content)
+        if content.find("a", attrs={"style": "color:blue", "class":"clsopentLogin"}) is None:
+            for p_tag in content.find_all(True):
+                del p_tag["href"]
+            return str(content)
+        else:
+            return ""
     else:
         return ""
 
