@@ -1,4 +1,4 @@
-from my_crawler.url_helper import load_url, get_id_from_url
+from my_crawler.crawler_helper.url_helper import load_url, get_id_from_url
 from utilities.common import extract_raw_text_from_html
 from constant.crawler_contants import VERSION
 

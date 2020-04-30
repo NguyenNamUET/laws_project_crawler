@@ -1,4 +1,4 @@
-from importer.pg_connect import postgreSQL_pool
+from importer.pg_importer.pg_connect import postgreSQL_pool
 connection = postgreSQL_pool.getconn()
 
 

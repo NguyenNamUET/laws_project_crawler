@@ -1,4 +1,4 @@
-from importer.pg_operator.pg_insert import insert_table
+from importer.pg_importer.pg_operator.pg_insert import insert_table
 from constant.crawler_contants import SCHEMA
 
 

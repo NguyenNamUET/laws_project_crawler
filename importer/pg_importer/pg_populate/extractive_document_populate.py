@@ -2,8 +2,8 @@ from utilities.reader_helper import load_jsonl_from_gz, get_content_by_gz, load_
 from utilities.writer_helper import store_json
 from utilities.common import remove_accents
 
-from importer.pg_operator.pg_insert import insert_table
-from importer.pg_operator.pg_query import get_obj_by_attribute, restart_seq
+from importer.pg_importer.pg_operator.pg_insert import insert_table
+from importer.pg_importer.pg_operator.pg_query import get_obj_by_attribute, restart_seq
 
 from tqdm import tqdm
 import os
@@ -44,35 +44,35 @@ def produce__row(doc_obj):
         term_value = None
         if attribute_name == "official_number" and len(attribute_value) != 0:
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["official_number"])[0][0]
             term_value = attribute_value
 
         elif attribute_name == "document_info" and len(attribute_value) != 0:
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["document_info"])[0][0]
             term_value = attribute_value
 
         elif attribute_name == "issuing_body/office/signer" and len(attribute_value) != 0:
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["issuing_body/office/signer"])[0][0]
             term_value = attribute_value
 
         elif attribute_name == "document_type" and len(attribute_value) != 0:
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["document_type"])[0][0]
             term_value = attribute_value
 
         elif attribute_name == "document_field" and len(attribute_value) != 0:
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["document_field"])[0][0]
             term_value = attribute_value
@@ -82,77 +82,77 @@ def produce__row(doc_obj):
 
         elif attribute_name == "issued_date" and attribute_value != '':
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["issued_date"])[0][0]
             term_value = [attribute_value]
 
         elif attribute_name == "effective_date" and attribute_value != '':
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["effective_date"])[0][0]
             term_value = [attribute_value]
 
         elif attribute_name == "enforced_date" and attribute_value != '':
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["enforced_date"])[0][0]
             term_value = [attribute_value]
 
         elif attribute_name == "the_reason_for_this_expiration" and len(attribute_value) != 0:
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["the_reason_for_this_expiration"])[0][0]
             term_value = attribute_value
 
         elif attribute_name == "the_reason_for_this_expiration_part" and len(attribute_value) != 0:
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["the_reason_for_this_expiration_part"])[0][0]
             term_value = attribute_value
 
         elif attribute_name == "effective_area" and attribute_value != "":
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["effective_area"])[0][0]
             term_value = [attribute_value]
 
         elif attribute_name == "expiry_date" and attribute_value != '':
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["expiry_date"])[0][0]
             term_value = [attribute_value]
 
         elif attribute_name == "gazette_date" and attribute_value != '':
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["gazette_date"])[0][0]
             term_value = [attribute_value]
 
         elif attribute_name == "information_applicable" and len(attribute_value) != 0:
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["information_applicable"])[0][0]
             term_value = attribute_value
 
         elif attribute_name == "document_department" and len(attribute_value) != 0:
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["document_department"])[0][0]
             term_value = attribute_value
 
         elif attribute_name == "collection_source" and len(attribute_value) != 0:
             term_id = get_obj_by_attribute(table="laws_documentmetadataterm",
-                                           columns=["term_id"],
+                                           selected_columns=["term_id"],
                                            attribute_names=["name"],
                                            attribute_values=["collection_source"])[0][0]
             term_value = attribute_value
@@ -162,11 +162,9 @@ def produce__row(doc_obj):
             insert_table("extractive_document_metadata", extractive_document_metadata_record)
 
 
-
-
 def populate__extractive_document_and_extractive_document_metadata__table(data_path):
-    restart_seq()
-    for file_path in tqdm(os.listdir(data_path), total=len(os.listdir(data_path))):
+    restart_seq("laws_extractivedocument")
+    for file_path in tqdm(os.listdir(data_path)[:100], total=len(os.listdir(data_path)[:100])):
         if get_content_by_gz(data_path + "/" + file_path) != "":
             doc_obj = load_jsonl_from_gz(data_path + "/" + file_path)
             produce__row(doc_obj)

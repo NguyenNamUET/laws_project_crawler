@@ -1,5 +1,5 @@
-from importer.pg_operator.pg_insert import insert_table
-from constant.crawler_contants import VERSION, SCHEMA
+from importer.pg_importer.pg_operator.pg_insert import insert_table
+from constant.crawler_contants import SCHEMA
 
 
 def produce__relation_type_row(version, schema):

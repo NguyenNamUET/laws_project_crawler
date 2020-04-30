@@ -1,4 +1,4 @@
-from my_crawler.url_helper import load_url
+from my_crawler.crawler_helper.url_helper import load_url
 
 
 def get_url_from_page__vbpl(sitemap_url):

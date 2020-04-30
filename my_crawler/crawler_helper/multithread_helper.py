@@ -1,11 +1,10 @@
 import concurrent.futures
 from tqdm import tqdm
 import math
-import os
 
-from my_crawler.url_helper import get_id_from_url, get_id_from_url__vbpl
-from my_crawler.document_thuvienphapluat_transform import scrapy_thuvienphapluat
-from my_crawler.document_vbpl_transform import scrapy_vbpl
+from my_crawler.crawler_helper.url_helper import get_id_from_url, get_id_from_url__vbpl
+from my_crawler.transformer.document_thuvienphapluat_transform import scrapy_thuvienphapluat
+from my_crawler.transformer.document_vbpl_transform import scrapy_vbpl
 
 from utilities.writer_helper import store_gz, store_error, write_to_record
 from utilities.common import grouper, is_validate_json
