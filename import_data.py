@@ -27,38 +27,51 @@ def es_import(path):
     load_vbpl(path)
 
 
-def run_import_manual():
-    data_path = sys.argv
-    if len(data_path) > 2:
-        print("Only pass transform directory path")
-    else:
-        while True:
-            choice_input = input("Chọn phương thức import:\n"
+def run_import_manual(data_path):
+    while True:
+        choice_input = input("Chọn phương thức import:\n"
                                  "1.Import vào Postgresql\n"
                                  "2.Import vào ElasticSearch\n"
                                  "3.Import cả hai (Postgresql sau đó ElasticSearch)\n"
                                  "Nhập lựa chọn: ")
-            if choice_input != "1" and choice_input != "2" and choice_input != "3":
-                print("Nhập lại")
-            else:
-                break
+        if choice_input != "1" and choice_input != "2" and choice_input != "3":
+            print("Nhập lại")
+        else:
+            break
 
-        if choice_input == "1":
-            pg_import(data_path[1])
-        elif choice_input == "2":
-            es_import(data_path[1])
-        elif choice_input == "3":
-            pg_import(data_path[1])
-            es_import(data_path[1])
+    if choice_input == "1":
+        pg_import(data_path)
+    elif choice_input == "2":
+        es_import(data_path)
+    elif choice_input == "3":
+        pg_import(data_path)
+        es_import(data_path)
 
-        print("Finish!")
+    print("Finish!")
 
 
 def run_import_auto(data_path):
     print("run_import_auto from ", data_path)
     pg_import(data_path)
     es_import(data_path)
+    print("Finish!")
 
 
 if __name__ == "__main__":
-    run_import_manual()
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("mode", type=str,
+                        help='''"auto" or "manual"''')
+    parser.add_argument("-m", "--mode", action="store_true",
+                        help="choose import as auto or manual mode")
+    parser.add_argument("path", type=str,
+                        help="path of transform folder")
+    parser.add_argument("-p", "--path", action="store_true",
+                        help="choose path of transform folder")
+    args = parser.parse_args()
+
+    if args.mode == "auto":
+        run_import_auto(args.path)
+    elif args.mode == "manual":
+        run_import_manual(args.path)

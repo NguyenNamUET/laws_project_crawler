@@ -262,4 +262,16 @@ def run_crawl_manual():
 
 
 if __name__ == "__main__":
-    run_crawl_auto()
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("mode", type=str,
+                        help='''"auto" or "manual"''')
+    parser.add_argument("-m", "--mode", action="store_true",
+                        help="choose crawl as auto or manual mode")
+    args = parser.parse_args()
+
+    if args.mode == "auto":
+        run_crawl_auto()
+    elif args.mode == "manual":
+        run_crawl_manual()

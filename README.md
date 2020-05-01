@@ -7,12 +7,25 @@ Start date: 03/02/2020
 
 #Crawler
 #### How to run
+1/ Manual Mode
 ```sh
-    $ python3 crawl_thuvienphapluat.py   
+    $ python3 crawl_data.py -m manual
 ```
+Prompt for inputs as:
+1. Crawl check with latest version
+2. Crawl check with latest version having largest transform data
+3. Crawl check custom version (**user need to input path to transform folder**)
+4. Crawl without checking
 
+After running option 1,2 or 3, a prompt specifies merging with that version (choosing Y/N)
+
+2/ Auto mode
+```sh
+    $ python3 crawl_data.py -m auto
+```
+Auto mode will auto check for latest version and merge with that version
 ###Ouput 
-Root directory: **.../vnu_law/crawler/thuvienphapluat.vn/<YYYYMMDD_HHMMSS>**
+Root directory: **.../vnu_law/crawler/<thuvienphapluat.vn/vbpl.vn>/<YYYYMMDD_HHMMSS>**
 
 Sub directories include:
 
@@ -25,9 +38,21 @@ Sub directories include:
 #Importer
 ###How to run
 ```shell script
-    $ pyhon3 import_data_thuvienphapluat.py <path to Directory stores law documents with JSON schema>
+    $ pyhon3 import_data.py -m <mode> -p <path_to_data/transform>
 ```
-For example:
+Manual mode prompt will be displayed as
+1. Import to Postgresql
+2. Import to Elasticsearch
+3. Import to both (Postgresql then Elasticsearch)
+
+Auto mode will perform options 3 of manual mode
+
+
+#Crawler and Importer working together
 ```shell script
-    $pyhon3 import_data_thuvienphapluat.py /vnu_law/my_crawler/thuvienphapluat.vn/<YYYYMMDD_HHMMSS>/transform
+    $ pyhon3 crawl_then_import.py
 ```
+performs auto crawler then auto import
+
+##Note:
+If auto crawler finds no change in thuvienphapluat.vn and vbpl.vn, it will sleep for 2 days. Switching to manual is recommended 

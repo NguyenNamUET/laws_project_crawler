@@ -9,7 +9,7 @@ try:
                                                            port=PG_PORT,
                                                            database=PG_DB_NAME)
     if postgreSQL_pool:
-        print("Connection pool created successfully")
+        print("Connection Postgresql pool created successfully")
 
 except (Exception, psycopg2.DatabaseError) as error:
     print("Error while connecting to PostgreSQL: ", error)
