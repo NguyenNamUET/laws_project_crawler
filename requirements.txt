@@ -38,7 +38,7 @@ sib-api-v3-sdk==6.0.3
 six==1.14.0
 soupsieve==1.9.5
 tqdm==4.42.1
-urllib3==1.25.8
+urllib3==1.26.5
 w3lib==1.21.0
 websockets==8.1
 zipp==2.2.0
